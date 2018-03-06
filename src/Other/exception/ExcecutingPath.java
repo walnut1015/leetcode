@@ -13,11 +13,13 @@ public class ExcecutingPath
     public void devideByZero()
     {
         ArrayList<String> strs = new ArrayList<>();
-        strs.add("tanya");
-
+        try {
+            strs.add("tanya");
             int a = 1/0;
             System.out.println("OutOfBoundException抛出的后一行");
-
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         System.out.println("捕捉到OutOfBoundException继续执行");
     }
 }
