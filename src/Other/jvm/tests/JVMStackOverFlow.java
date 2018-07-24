@@ -11,6 +11,7 @@ public class JVMStackOverFlow
     private int stackLen = 1;
     public void stackLeak()
     {
+        System.out.println(stackLen);
         stackLen++;
         stackLeak();
     }
