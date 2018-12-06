@@ -15,6 +15,8 @@ public class TestThreadLocal
         @Override
         public Value initialValue(){
             Value v = new Value();
+            AtomicReference<Integer> a = new AtomicReference<>(new Integer(5));
+            a.compareAndSet(1,2);
             v.value = 5;
             return v;
         }

@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Random;
 import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * @author tanya
@@ -24,20 +25,20 @@ public class BlockingClass {
         public void run(){
             while (true){
                 synchronized (queue) {
-                    while (queue.isEmpty()) {
+                    while (true) {
                         try {
                             queue.wait();
                         } catch (InterruptedException e) {
-                            return;
+                            e.printStackTrace();
                         }
                         finally {
-                            System.out.println(name+"返回了");
+                            //System.out.println(name+"返回了");
                             System.out.println(Thread.currentThread().getState());
                         }
                     }
-                    System.out.println(name+"取出"+queue.poll());
+                    /*System.out.println(name+"取出"+queue.poll());
                     System.out.println(Thread.currentThread().getState());
-                    queue.notify();
+                    queue.notify();*/
                 }
         }
     }
@@ -50,26 +51,13 @@ public class BlockingClass {
             this.name=name;
             this.queue = queue;
             this.maxSize = maxSize;
+
         }
         @Override
         public void run(){
             //while (true){
             for(int i = 0;i<10;i++) {
-                synchronized (queue) {
-                    while (queue.size() == maxSize) {
-                        try {
-                            //只有执行到wait方法的时候才会让出锁，这种生产者-消费者机制不是很好
-                            queue.wait();
-                        } catch (InterruptedException e) {
-                            return;
-                        }
-                    }
-                    int temp = i;
-                    queue.offer(temp);
-                    System.out.println("生产者放入：" + temp);
-                    System.out.println(Thread.currentThread().getState());
-                    queue.notify();
-                }
+                return;
             }
             }
 
@@ -85,16 +73,32 @@ public class BlockingClass {
         t3.start();
         try {
             Thread.sleep(300);
-            /*t3.stop();
-            t1.stop();*/
+            System.out.println(t1.getState());
+            System.out.println(t2.getState());
+            System.out.println(t3.getState());
+            t3.interrupt();
+            t2.interrupt();
+            t1.interrupt();
+            Thread.sleep(300);
+            System.out.println(t1.getState());
+            System.out.println(t2.getState());
+            System.out.println(t3.getState());
+            Thread.sleep(300);
+            System.out.println("t1"+t1.isInterrupted());
+            System.out.println("t2"+t2.isInterrupted());
+            System.out.println("t3"+t3.isInterrupted());
+            Thread.sleep(300);
             System.out.println(t2.getState());
             System.out.println(t1.getState());
             System.out.println(t3.getState());
-            /*t3.interrupt();
+
+
+            t3.interrupt();
+            t2.interrupt();
             t1.interrupt();
             System.out.println(t2.getState());
             System.out.println(t1.getState());
-            System.out.println(t3.getState());*/
+            System.out.println(t3.getState());
         } catch (InterruptedException e) {
             Semaphore ee;
             System.out.println("线程被阻塞");

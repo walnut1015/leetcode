@@ -1,5 +1,8 @@
 package Other.jvm.tests;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * class: JVMStackOverFlow
  *
@@ -8,6 +11,7 @@ package Other.jvm.tests;
  */
 public class JVMStackOverFlow
 {
+    public List<Integer> list = new ArrayList<>();
     private int stackLen = 1;
     public void stackLeak()
     {

@@ -1,6 +1,7 @@
 package Other.threadsynchronize;
 
 
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * @author tanya
@@ -44,6 +45,8 @@ public class TestInnerLock {
         @Override
         public void run(){
             while (true){
+                ReentrantLock l = new ReentrantLock();
+
             count.add();
             Thread.yield();
             }
@@ -56,5 +59,4 @@ public class TestInnerLock {
         t1.start();
         t2.start();
     }
-
 }
