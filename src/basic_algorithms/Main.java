@@ -96,7 +96,7 @@ public class Main {
         }
     }
     public static int[] leastSteps;
-    public static void main(String[] args) {
+    public static void main3(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int destination = scanner.nextInt();
         leastSteps = new int[destination*2];
@@ -160,4 +160,54 @@ public class Main {
         }
         return false;
     }
+    private  static int row, col;
+    public static void main(String[] args) {
+        ThreadLocal<Integer> a;
+        Scanner in = new Scanner(System.in);
+        row = in.nextInt();
+        col = in.nextInt();
+        int seaWaterHght = in.nextInt();
+        int [][]map = new int[row][col];
+        for(int i = 0;i < row; i++){
+            for(int j = 0; j<col;j++){
+                map[i][j] = (in.nextInt() - seaWaterHght)>0?1:0;
+            }
+        }
+        int count = 0;
+        for(int i = 0;i < row; i++){
+            waterCome(map, i, 0);
+            waterCome(map, i , col-1);
+        }
+        for(int j = 0; j<col; j++){
+            waterCome(map, 0,j);
+            waterCome(map, row - 1, j);
+        }
+        for(int i = 0;i < row; i++){
+            for(int j = 0; j<col;j++){
+                if(map[i][j] != -1) {
+                        count++;
+                }
+
+            }
+        }
+        System.out.println(count);
+        System.out.println(visitedTimes);
+    }
+    private static int visitedTimes = 0;
+    private static void waterCome(int[][] map, int i, int j ){
+        visitedTimes++;
+        if( i < 0 || i > row-1|| j < 0||j > col-1 || map[i][j] != 0){
+            return;
+        }
+        if(map[i][j] == 0){
+            map[i][j] = -1;
+            waterCome(map, i+1, j);
+            waterCome(map, i, j+1);
+            waterCome(map, i-1, j);
+            waterCome(map, i, j-1);
+        }
+
+    }
+
+
 }

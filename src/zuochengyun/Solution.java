@@ -12,6 +12,12 @@ import java.util.Stack;
  * @date 2018/7/19 8:09
  */
 public class Solution {
+    /**
+     * 将链表划分为比a小，等于a,比a大三个部分。
+     * @param head 链表头
+     * @param num 数字a
+     * @return  新链表头
+     */
     public static ListNode ListNodePartition(ListNode head, int num){
         if(head==null){
             return head;
@@ -62,7 +68,9 @@ public class Solution {
         return small;
     }
     //用先序遍历的方式将二叉树序列化
-    public String serializeBT(TreeNode head)
+    public String serializeBT(TreeNode head){
+        return null;
+    }
 /**
  *  public TreeNode deSerializeBT(String str){
         String[] eles = str.split("!");
@@ -148,6 +156,38 @@ public class Solution {
             return new TreeNode(Integer.parseInt(str));
         }
     }
+
+    /*public boolean contains(TreeNode t1, TreeNode t2){
+        if(t1==null){
+            return false;
+        }
+        TreeNode last = t1;
+        TreeNode pt1 = t1, pt2 = t2;
+        LinkedList<TreeNode> stack1 = new LinkedList<>();
+        LinkedList<TreeNode> stack2 = new LinkedList<>();
+        Thread.currentThread().getState();
+        while (pt1!=null || !stack1.isEmpty()){
+            //表示t2树已经匹配完成
+            if(pt2 == null){
+               return true;
+            }
+            if(pt1.val != pt2.val || (pt1==null && pt2!=null)){
+                pt1 = last;
+                last
+            }
+            if(pt1.val == pt2.val){
+
+            }
+
+            if(pt1 != null){
+
+                stack.push(pt1);
+                pt1 = pt1.left;
+
+            }
+        }
+        return false;
+    }*/
 }
 
 
