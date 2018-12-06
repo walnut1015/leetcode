@@ -1,4 +1,7 @@
+import sun.misc.Unsafe;
+
 import java.util.Scanner;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class test
 {
@@ -14,10 +17,25 @@ public class test
             System.out.println(num);
         }
     }
+    private static class MyValue{
+        private String name = "init";
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getName() {
+            return name;
+        }
+    }
     public static void main(String[] args){
-        MyThread t = new MyThread();
-        t.start();
-        num = 3;
-        ready = true;
+       ThreadLocal<MyValue> threadLocal = new ThreadLocal<>();
+       MyValue v = new MyValue();
+       threadLocal.set(v);
+       v.setName("s");
+        System.out.println(threadLocal.get().getName());
+        Unsafe u;
+        ReentrantLock r;
+
     }
 }
